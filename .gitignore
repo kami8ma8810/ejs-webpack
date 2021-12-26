@@ -1,4 +1,3 @@
 node_modules/
-.htaccess
-.htpasswd
 .vscode
+.package-lock.json
