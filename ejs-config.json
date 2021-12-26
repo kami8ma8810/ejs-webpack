@@ -1,0 +1,25 @@
+{
+  "pageMeta": {
+    "home": {
+      "title": "タイトル",
+      "description": "概要",
+      "keywords": "キーワード",
+      "pageUrl": "サイトの絶対パス",
+      "stylePath": "./assets/css/",
+      "scriptPath": "./assets/js/",
+      "imgPath": "./assets/images/",
+      "linkPath": "./",
+      "isHome": true
+    },
+    "about": {
+      "title": "",
+      "description": "",
+      "keywords": "",
+      "pageUrl": "",
+      "stylePath": "./assets/css/",
+      "scriptPath": "./assets/js/",
+      "imgPath": "./assets/images/",
+      "linkPath": "./"
+    }
+  }
+}

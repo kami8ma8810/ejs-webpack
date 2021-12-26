@@ -1,0 +1,230 @@
+@use '../global' as *;
+
+// --------------------------------------------------------
+/* WebP未対応のブラウザ用のスタイル */
+// --------------------------------------------------------
+.no-webp {
+  .top-fv__title {
+    &.title-sp {
+      background-image: url(#{$imgPath}fv-title-sp.png);
+    }
+    &.title-pc {
+      &:nth-of-type(2) {
+        background-image: url(#{$imgPath}fv-title-pc1.png);
+      }
+      &:nth-of-type(3) {
+        background-image: url(#{$imgPath}fv-title-pc2.png);
+      }
+    }
+  }
+  .top-fv__person {
+    &.purple {
+      background-image: url(#{$imgPath}fv-purple-sp.png);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}fv-purple-pc.png);
+      }
+    }
+    &.blue {
+      background-image: url(#{$imgPath}fv-blue-sp.png);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}fv-blue-pc.png);
+      }
+    }
+    &.green {
+      background-image: url(#{$imgPath}fv-green-sp.png);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}fv-green-pc.png);
+      }
+    }
+    &.orange {
+      background-image: url(#{$imgPath}fv-orange-sp.png);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}fv-orange-pc.png);
+      }
+    }
+    &.yellow {
+      background-image: url(#{$imgPath}fv-yellow-sp.png);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}fv-yellow-pc.png);
+      }
+    }
+    &.red {
+      background-image: url(#{$imgPath}fv-red-sp.png);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}fv-red-pc.png);
+      }
+    }
+    &.mint {
+      background-image: url(#{$imgPath}fv-mint-sp.png);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}fv-mint-pc.png);
+      }
+    }
+  }
+  .skew-bg1 {
+    background-image: url(#{$imgPath}top-intro-bg-sp.png);
+    @include mq(lg) {
+      background-image: url(#{$imgPath}top-intro-bg-pc.png);
+    }
+  }
+  .skew-bg2 {
+    background-image: url(#{$imgPath}top-field-bg-sp.png);
+    @include mq(lg) {
+      background-image: url(#{$imgPath}top-field-bg-pc.png);
+    }
+  }
+  .skew-bg3 {
+    background-image: url(#{$imgPath}top-recruit-bg1-sp.png);
+    @include mq(lg) {
+      background-image: url(#{$imgPath}top-recruit-bg1-pc.png);
+    }
+  }
+  .skew-bg4 {
+    background-image: url(#{$imgPath}top-recruit-bg2-sp.png);
+    @include mq(lg) {
+      background-image: url(#{$imgPath}top-recruit-bg2-pc.png);
+    }
+  }
+  .intro-lead {
+    background-image: url(#{$imgPath}intro-fv-bg-sp.jpg);
+    @include mq(lg) {
+      background-image: url(#{$imgPath}intro-fv-bg-pc.jpg);
+    }
+  }
+  // .person-transition__obj {
+  //   &.page-person1 {
+  //     background-image: url(#{$imgPath}transition1sp.png);
+  //     @include mq(lg) {
+  //       background-image: url(#{$imgPath}transition1pc.png);
+  //     }
+  //   }
+  //   &.page-person2 {
+  //     background-image: url(#{$imgPath}transition2sp.png);
+  //     @include mq(lg) {
+  //       background-image: url(#{$imgPath}transition2pc.png);
+  //     }
+  //   }
+  //   &.page-person3 {
+  //     background-image: url(#{$imgPath}transition3sp.png);
+  //     @include mq(lg) {
+  //       background-image: url(#{$imgPath}transition3pc.png);
+  //     }
+  //   }
+  //   &.page-person4 {
+  //     background-image: url(#{$imgPath}transition4sp.png);
+  //     @include mq(lg) {
+  //       background-image: url(#{$imgPath}transition4pc.png);
+  //     }
+  //   }
+  //   &.page-person5 {
+  //     background-image: url(#{$imgPath}transition5sp.png);
+  //     @include mq(lg) {
+  //       background-image: url(#{$imgPath}transition5pc.png);
+  //     }
+  //   }
+  //   &.page-person6 {
+  //     background-image: url(#{$imgPath}transition6sp.png);
+  //     @include mq(lg) {
+  //       background-image: url(#{$imgPath}transition6pc.png);
+  //     }
+  //   }
+  //   &.page-person7 {
+  //     background-image: url(#{$imgPath}transition7sp.png);
+  //     @include mq(lg) {
+  //       background-image: url(#{$imgPath}transition7pc.png);
+  //     }
+  //   }
+  // }
+}
+// --------------------------------------------------------
+/* WebP対応のブラウザ用のスタイル */
+// --------------------------------------------------------
+.webp {
+  .top-fv__title {
+    &.title-sp {
+      background-image: url(#{$imgPath}webp/fv-title-sp.webp);
+    }
+    &.title-pc {
+      &:nth-of-type(2) {
+        background-image: url(#{$imgPath}webp/fv-title-pc1.webp);
+      }
+      &:nth-of-type(3) {
+        background-image: url(#{$imgPath}webp/fv-title-pc2.webp);
+      }
+    }
+  }
+  .top-fv__person {
+    &.purple {
+      background-image: url(#{$imgPath}webp/fv-purple-sp.webp);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}webp/fv-purple-pc.webp);
+      }
+    }
+    &.blue {
+      background-image: url(#{$imgPath}webp/fv-blue-sp.webp);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}webp/fv-blue-pc.webp);
+      }
+    }
+    &.green {
+      background-image: url(#{$imgPath}webp/fv-green-sp.webp);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}webp/fv-green-pc.webp);
+      }
+    }
+    &.orange {
+      background-image: url(#{$imgPath}webp/fv-orange-sp.webp);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}webp/fv-orange-pc.webp);
+      }
+    }
+    &.yellow {
+      background-image: url(#{$imgPath}webp/fv-yellow-sp.webp);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}webp/fv-yellow-pc.webp);
+      }
+    }
+    &.red {
+      background-image: url(#{$imgPath}webp/fv-red-sp.webp);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}webp/fv-red-pc.webp);
+      }
+    }
+    &.mint {
+      background-image: url(#{$imgPath}webp/fv-mint-sp.webp);
+      @include mq(tabOver) {
+        background-image: url(#{$imgPath}webp/fv-mint-pc.webp);
+      }
+    }
+  }
+  .skew-bg1 {
+    background-image: url(#{$imgPath}webp/top-intro-bg-sp.webp);
+    @include mq(lg) {
+      background-image: url(#{$imgPath}webp/top-intro-bg-pc.webp);
+    }
+  }
+  .skew-bg2 {
+    background-image: url(#{$imgPath}webp/top-field-bg-sp.webp);
+    @include mq(lg) {
+      background-image: url(#{$imgPath}webp/top-field-bg-pc.webp);
+    }
+  }
+  .skew-bg3 {
+    background-image: url(#{$imgPath}webp/top-recruit-bg1-sp.webp);
+    @include mq(lg) {
+      background-image: url(#{$imgPath}webp/top-recruit-bg1-pc.webp);
+    }
+  }
+  .skew-bg4 {
+    background-image: url(#{$imgPath}webp/top-recruit-bg2-sp.webp);
+    @include mq(lg) {
+      background-image: url(#{$imgPath}webp/top-recruit-bg2-pc.webp);
+    }
+  }
+  .intro-lead {
+    background-image: url(#{$imgPath}webp/intro-fv-bg-sp.webp);
+    @include mq(lg) {
+      background-image: url(#{$imgPath}webp/intro-fv-bg-pc.webp);
+    }
+  }
+}

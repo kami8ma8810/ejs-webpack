@@ -1,0 +1,12 @@
+<!-- background-imageでwebpファイルを使うためにJSで判定-->
+<script type="text/javascript" src="<%= meta.scriptPath %>vendors/modernizr-webp.js"></script>
+
+<!-- IE11 pictureタグ用 -->
+<script type="text/javascript" src="<%= meta.scriptPath %>vendors/picturefill.js"></script>
+
+<!-- IE11用 InterSectionObserver -->
+<!-- <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"></script> -->
+
+<!-- 共通で読み込む -->
+<script src="<%= meta.scriptPath %>vendors.bundle.js"></script>
+<script src="<%= meta.scriptPath %>index.bundle.js"></script>

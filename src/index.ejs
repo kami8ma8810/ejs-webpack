@@ -1,0 +1,17 @@
+<% const page='home'; %>
+<!DOCTYPE html>
+<html lang="ja">
+<%- include('./_head.ejs',{meta:pageMeta[page]}); %>
+
+<body>
+  <%# include('./_loading.ejs',{meta:data.pageMeta[page]}); %>
+  <div id="common-container" class="common-container">
+    <%- include('./_header.ejs',{meta:pageMeta[page]}); %>
+    <%- include('./_drawer.ejs',{meta:pageMeta[page]}); %>
+    <%- include('./_main.ejs',{meta:pageMeta[page]}); %>
+    <%- include('./_footer.ejs',{meta:pageMeta[page]}); %>
+  </div>
+  <%- include('./_footer-script.ejs',{meta:pageMeta[page]}); %>
+</body>
+
+</html>

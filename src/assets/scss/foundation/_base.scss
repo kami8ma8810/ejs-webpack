@@ -1,0 +1,28 @@
+@use '../global' as *;
+
+// スクリーンリーダー非表示用
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  border: 0;
+}
+
+body {
+  margin: 0;
+  &.ua-safari {
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.common-container {
+}
+
+a.is-current {
+  pointer-events: none;
+}

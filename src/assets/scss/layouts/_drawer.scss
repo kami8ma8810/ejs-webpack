@@ -1,0 +1,88 @@
+@use '../global' as *;
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 8000;
+  width: 100%;
+  height: 100vh;
+  @include vh100;
+  background: #fff;
+  @include mq(lg) {
+    display: none;
+  }
+}
+
+.drawer__nav {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.drawer-close-button {
+  position: fixed;
+  top: vw(38);
+  right: vw(24);
+  display: inline-block;
+  width: vw(92);
+  height: vw(60);
+  z-index: 1;
+  &__icon {
+    position: absolute;
+    top: vw(24);
+    right: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+    transform: rotate(-32deg);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: rotate(64deg);
+      display: block;
+      background-color: inherit;
+      width: 100%;
+      height: 1px;
+    }
+  }
+}
+
+// ----------------------------------------
+// ドロワーアニメーション 初期設定 (aria-expanded)
+// ----------------------------------------
+.drawer[aria-expanded] {
+  transition-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+  // transition-duration: 0.3s;
+  // transition-delay: 0.2s;
+}
+
+.drawer[aria-expanded] .drawer__nav {
+  // transition-timing-function: ease-out;
+  // transition-duration: 1s;
+  // transition-property: opacity transform;
+}
+
+// ----------------------------------------
+// 開いているとき
+// ----------------------------------------
+.drawer[aria-expanded='true'] {
+  visibility: visible;
+  transform: translate3d(0, 0, 0);
+}
+
+.drawer[aria-expanded='true'] .drawer__nav {
+}
+
+// ----------------------------------------
+// 閉じているとき
+// ----------------------------------------
+.drawer[aria-expanded='false'] {
+  visibility: hidden;
+  transform: translate3d(100%, 0, 0);
+}

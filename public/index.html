@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix="og:http://ogp.me/ns# fb:http://ogp.me/ns/fb# article:http://ogp.me/ns/article#">
+<meta charset="UTF-8">
+<title>タイトル</title>
+<meta name="description" content="概要">
+<meta name="keywords" content="キーワード">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="robots" content="index,follow">
+<meta content="telephone=no" name="format-detection">
+<meta property="og:title" content="タイトル">
+<meta property="og:description" content="概要">
+<meta property="og:url" content="サイトの絶対パス">
+<meta property="og:image" content="サイトの絶対パス/assets/images/ogp.jpg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="サイト名">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:src" content="サイトの絶対パスassets/images/ogp.jpg">
+<meta name="twitter:title" content="タイトル">
+<meta name="twitter:description" content="概要">
+<meta name="thumbnail" content="サイトの絶対パスassets/images/ogp.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,500;1,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,500;1,700&display=swap" media="print" onload='this.media="all"'>
+<noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,500;1,700&display=swap">
+</noscript>
+<link rel="stylesheet" href="./assets/css/style.css" media="print" onload='this.media="all"'>
+</head>
+<body>
+<div id="common-container" class="common-container">
+<header class="header js-header">
+<div class="header-inner">
+<p><img src="./assets/images/logo.png" alt="" width="256" height="256"></p>
+<nav class="header-nav pc-nav" role="navigation">
+<ul class="header-items">
+<li class="header-item">MENU 1</li>
+<li class="header-item">MENU 2</li>
+<li class="header-item">MENU 3</li>
+</ul>
+</nav>
+<button id="js-openDrawer" class="drawer-open-button js-openDrawer is-sp" type="button" aria-controls="js-drawer" aria-expanded="false">
+<span class="drawer-open-button__icon">OPEN<span class="sr-only">メニューを開く</span></span>
+</button>
+</div>
+</header>
+<div id="js-drawer" class="drawer js-drawer" aria-expanded="false">
+<nav class="drawer__nav">
+<ul class="drawer-items">
+<li class="drawer-item">menu1</li>
+<li class="drawer-item">menu2</li>
+<li class="drawer-item">menu3</li>
+</ul>
+</nav>
+<button id="js-closeDrawer" class="drawer-close-button js-closeDrawer" type="button" aria-controls="drawer" aria-expanded="false">CLOSE
+<span class="drawer-close-button__icon"><span class="sr-only">メニューを閉じる</span></span>
+</button>
+</div>
+<main class="main">
+<section>
+<h1>TOP PAGE</h1>
+<a href="./about.html">ABOUTへ</a>
+</section>
+</main>
+<footer class="footer">
+<p translate="no">© 2022 xxx</p>
+</footer>
+</div>
+<script type="text/javascript" src="./assets/js/vendors/modernizr-webp.js"></script>
+<script type="text/javascript" src="./assets/js/vendors/picturefill.js"></script>
+<script src="./assets/js/vendors.bundle.js"></script>
+<script src="./assets/js/index.bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+// color
+$colorWhite: #fff !default;
+$colorGreen: #37ab9d !default;
+$colorYellow: #ffef62 !default;
+$colorRed: #e93d3d !default;
+$colorPerson1: #ceb028 !default;
+$colorPerson2: #6eb6a7 !default;
+$colorPerson3: #c53764 !default;
+$colorPerson4: #0086cf !default;
+$colorPerson5: #329350 !default;
+$colorPerson6: #a273b6 !default;
+$colorPerson7: #d3781e !default;
+
+// パス
+$imgPath: '../images/';
+$fontPath: '../fonts/';
+
+// ブレイクポイント
+$breakpoints: (
+  'se': (
+    max-width: 360px,
+  ),
+  'xs': (
+    min-width: 320px,
+  ),
+  's': (
+    min-width: 375px,
+  ),
+  'sm': (
+    min-width: 520px,
+  ),
+  'md': (
+    min-width: 768px,
+  ),
+  'lg': (
+    min-width: 960px,
+  ),
+  'tab': (
+    min-width: 1024px,
+  ),
+  'tabOver': (
+    min-width: 1025px,
+  ),
+  'pc': (
+    min-width: 1280px,
+  ),
+  'xl': (
+    min-width: 1366px,
+  ),
+  'pc-md': (
+    min-width: 1536px,
+  ),
+  'pc-lg': (
+    min-width: 1920px,
+  ),
+) !default;
+
+/*
+イージング
+https://easings.net/ja
+ */
+$easeOutExpo: cubic-bezier(0.16, 1, 0.3, 1);
+$easeInExpo: cubic-bezier(0.7, 0, 0.84, 0);
+$easeInOutExpo: cubic-bezier(0.87, 0, 0.13, 1);
+$easeOutQuart: cubic-bezier(0.25, 1, 0.5, 1);
+$easeInQuart: cubic-bezier(0.5, 0, 0.75, 0);
+$easeInOutQuart: cubic-bezier(0.76, 0, 0.24, 1);
+$easeOutCirc: cubic-bezier(0, 0.55, 0.45, 1);
+$easeInCirc: cubic-bezier(0.55, 0, 1, 0.45);
+$easeInOutCirc: cubic-bezier(0.85, 0, 0.15, 1);
+$easeOutCubic: cubic-bezier(0.33, 1, 0.68, 1);
+$easeInCubic: cubic-bezier(0.32, 0, 0.67, 0);
+$easeOutBack: cubic-bezier(0.34, 1.56, 0.64, 1);
+$easeInBack: cubic-bezier(0.36, 0, 0.66, -0.56);
+$easeInOutBack: cubic-bezier(0.68, -0.6, 0.32, 1.6);
