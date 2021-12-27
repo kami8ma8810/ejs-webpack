@@ -9,9 +9,9 @@
   height: 100vh;
   @include vh100;
   background: #fff;
-  @include mq(lg) {
-    display: none;
-  }
+  // @include mq(lg) {
+  //   display: none;
+  // }
 }
 
 .drawer__nav {
@@ -58,8 +58,9 @@
 // ----------------------------------------
 .drawer[aria-expanded] {
   transition-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
-  // transition-duration: 0.3s;
+  transition-duration: 0.3s;
   // transition-delay: 0.2s;
+  transition-property: transform opacity;
 }
 
 .drawer[aria-expanded] .drawer__nav {
@@ -72,8 +73,13 @@
 // 開いているとき
 // ----------------------------------------
 .drawer[aria-expanded='true'] {
+  opacity: 1;
   visibility: visible;
   transform: translate3d(0, 0, 0);
+  // transition-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+  // transition-duration: 0.3s;
+  // transition-delay: 0.2s;
+  // transition-property: transform opacity;
 }
 
 .drawer[aria-expanded='true'] .drawer__nav {
@@ -83,6 +89,11 @@
 // 閉じているとき
 // ----------------------------------------
 .drawer[aria-expanded='false'] {
+  opacity: 0;
   visibility: hidden;
   transform: translate3d(100%, 0, 0);
+  // transition-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+  // transition-duration: 0.3s;
+  // transition-delay: 0.2s;
+  // transition-property: transformo pacity;
 }

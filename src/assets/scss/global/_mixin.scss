@@ -1,5 +1,24 @@
 @use 'variables' as *;
 
+// ## webp classes
+$webpClassName: '.webp';
+$noWebpClassName: '.no-webp';
+
+// $selector にする background-image で、webp を出し分ける
+// ※親要素に $webpClassName / $noWebpClassName が付与されることが前提
+// --------------------------------------------------------
+// $selector      {string} css セレクタ (default: jpg)
+// $filePath      {string} 背景画像ファイルパス
+// $fileExtension {string} 背景画像拡張子
+@mixin webpBg($selector, $filePath, $fileExtension: 'jpg') {
+  #{$noWebpClassName} #{$selector} {
+    background-image: url(#{$filePath}.#{$fileExtension});
+  }
+  #{$webpClassName} #{$selector} {
+    background-image: url(#{$filePath}.webp);
+  }
+}
+
 // メディアクエリ
 @mixin mq($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {
@@ -19,61 +38,6 @@
   // ホバーが使えるデバイス用（IEのみ非対応
   @media (hover: hover) {
     @content;
-  }
-}
-@mixin eggFloating {
-  animation-name: eggAnime;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-duration: 1s;
-  // will-change: transform, animation;
-}
-
-@keyframes eggAnime {
-  0% {
-    // transform: translate3d(0, 0%, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, 15px, 0);
-    -webkit-transform: translate3d(0, 15px, 0);
-    -ms-transform: translate3d(0, 15px, 0);
-  }
-}
-
-@mixin floating {
-  animation-name: floatAnime;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-duration: 1.2s;
-  // will-change: transform, animation;
-}
-@keyframes floatAnime {
-  0% {
-    transform: translate3d(0, -5%, 0);
-  }
-  100% {
-    transform: translate3d(0, 5%, 0);
-  }
-}
-@mixin floatingPc {
-  animation-name: floatAnime;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-duration: 1.2s;
-  // will-change: transform, animation;
-}
-@keyframes floatAnime {
-  0% {
-    transform: translate3d(0, -10%, 0);
-  }
-  100% {
-    transform: translate3d(0, 10%, 0);
   }
 }
 
