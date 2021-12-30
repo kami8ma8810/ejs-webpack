@@ -4,7 +4,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // // スクロール開始でヘッダー背景を黒、サイズを小さくする
 export default function () {
-  console.log("header-change.js");
+  console.log("RUN__header-change.js");
   ScrollTrigger.create({
     trigger: document.body,
     start: "1px top",

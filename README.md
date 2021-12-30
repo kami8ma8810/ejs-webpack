@@ -1,4 +1,4 @@
 # ejs-webpack
 
-## バージョン
-Node.js v14.18.0
+## Node.js Version
+14.18.0

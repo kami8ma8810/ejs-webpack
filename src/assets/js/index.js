@@ -7,6 +7,11 @@ import highlightNav from './libs/highlight-nav';
 import ScrollObserver from './libs/scroll-observer';
 import ua from './libs/ua-parser';
 
+import modernFunction from './debug_webpack/modern-function';
+import headerChange from './libs/header-change';
+import parallax from './libs/parallax';
+
+
 document.addEventListener('DOMContentLoaded', function () {
   console.log('---------------------\nDOMContentLoaded\n---------------------');
   const main = new Main();
@@ -38,7 +43,10 @@ class Main {
       console.log('---------------------\nDONE__imagesLoaded\n---------------------');
       // loadingAnime();
       highlightNav();
+      parallax();
       drawer();
+      headerChange();
+
       this._scrollInit();
     });
   }

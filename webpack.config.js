@@ -8,6 +8,8 @@ const Webpack = require('webpack');
 module.exports = {
   // モードの設定
   mode: 'production',
+  // mode: 'development',
+
   // エントリーポイントの設定
   entry: {
     index: './src/assets/js/index.js',
@@ -24,12 +26,11 @@ module.exports = {
     // index.bundle.js と app.bundle.js が出力される
     filename: '[name].bundle.js',
   },
+  target: ['web', 'es5'],
   module: {
     rules: [
       {
         test: /\.js$/,
-        // include: path.resolve(__dirname, './src/js'),
-        // exclude: path.resolve(__dirname, './src/js/libs/barba-gsap.js'),
         exclude: /node_modules/,
         use: [
           {
@@ -39,12 +40,13 @@ module.exports = {
                 [
                   '@babel/preset-env',
                   {
-                    targets: {
-                      ie: 11,
-                      esmodules: true,
-                    },
+                    // targets: {
+                    //   ie: 11,
+                    //   esmodules: true,
+                    // },
                     useBuiltIns: 'usage',
-                    corejs: { version: '3', proposals: true },
+                    corejs: 3,
+                    // corejs: { version: '3', proposals: true },
                   },
                 ],
               ],
@@ -54,17 +56,14 @@ module.exports = {
       },
     ],
   },
-  // Bebal ES5(IE11等)向けの指定
-  target: ['web', 'es5'],
-  plugins: [
-    // まとめてインポートする
-    // new Webpack.ProvidePlugin({
-    // jQuery: 'jquery',
-    // $: 'jquery',
-    // gsap: 'gsap',
-    // barba: '@barba/core',
-    // }),
-  ],
+
+  // plugins: [
+  //   // まとめてインポートする
+  //   new Webpack.ProvidePlugin({
+  //     jQuery: 'jquery',
+  //     $: 'jquery',
+  //   }),
+  // ],
   optimization: {
     splitChunks: {
       // 共通モジュールとして分割する対象。以下の値を指定できる。
@@ -97,5 +96,11 @@ module.exports = {
         },
       }),
     ],
+  },
+  //webpackの中に画像の圧縮処理など、重い処理を含めるとwarningが表示されるため、それを回避する設定
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
   },
 };
