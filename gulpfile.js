@@ -2,13 +2,6 @@
 // gulpコマンドの省略
 const { src, dest, watch, lastRun, series, parallel } = require('gulp');
 
-// 読み込みの切り替え
-const $ = require('gulp-load-plugins')({
-  pattern: ['del'], // del パッケージを読み込む
-  overridePattern: false, // デフォルトのパターン ('gulp-*', 'gulp.*', '@*/gulp{-,.}*') を残す
-  maintainScope: false, // スコープパッケージを階層化しない
-});
-
 // EJS
 const fs = require('fs'); //Node.jsでファイルを操作するための公式モジュール
 const htmlMin = require('gulp-htmlmin');
@@ -47,7 +40,6 @@ const browserSync = require('browser-sync').create();
 // 削除
 const clean = require('gulp-clean');
 const del = require('del');
-const gulpLoadPlugins = require('gulp-load-plugins');
 
 //パス設定
 const paths = {
@@ -319,6 +311,7 @@ const browserReloadFunc = (done) => {
   done();
 };
 
+// -----------------------
 // ファイル削除
 // -----------------------
 // public 内をすべて削除
