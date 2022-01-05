@@ -1,5 +1,13 @@
+'use strict';
 // gulpコマンドの省略
 const { src, dest, watch, lastRun, series, parallel } = require('gulp');
+
+// 読み込みの切り替え
+const $ = require('gulp-load-plugins')({
+  pattern: ['del'], // del パッケージを読み込む
+  overridePattern: false, // デフォルトのパターン ('gulp-*', 'gulp.*', '@*/gulp{-,.}*') を残す
+  maintainScope: false, // スコープパッケージを階層化しない
+});
 
 // EJS
 const fs = require('fs'); //Node.jsでファイルを操作するための公式モジュール
@@ -26,11 +34,12 @@ const webpackConfig = require('./webpack.config');
 const webpackStream = require('webpack-stream');
 
 // 画像
-// const imageMin = require('gulp-imagemin');
-// const pngQuant = require('imagemin-pngquant');
-// const mozJpeg = require('imagemin-mozjpeg');
-// const svgo = require('gulp-svgo');
+const imageMin = require('gulp-imagemin');
+const pngQuant = require('imagemin-pngquant');
+const mozJpeg = require('imagemin-mozjpeg');
+const svgo = require('gulp-svgo');
 const webp = require('gulp-webp'); //webpに変換
+const changed = require('gulp-changed');
 
 // ブラウザ同期
 const browserSync = require('browser-sync').create();
@@ -38,6 +47,7 @@ const browserSync = require('browser-sync').create();
 // 削除
 const clean = require('gulp-clean');
 const del = require('del');
+const gulpLoadPlugins = require('gulp-load-plugins');
 
 //パス設定
 const paths = {
@@ -61,7 +71,7 @@ const paths = {
     src: './src/assets/images/**/*.{jpg,jpeg,png,gif,svg}',
     srcWebp: './src/assets/images/**/*.{jpg,jpeg,png}',
     dist: './public/assets/images/',
-    distWebp: './public/assets/images/webp/',
+    // distWebp: './public/assets/images/webp/',
   },
   fonts: {
     src: './src/assets/fonts/*.{off,ttf,woff,woff2}',
@@ -82,38 +92,36 @@ const paths = {
 const ejsCompile = () => {
   // ejsの設定を読み込む
   const data = JSON.parse(fs.readFileSync('./ejs-config.json'));
-  return (
-    src(paths.ejs.src)
-      .pipe(
-        plumber({
-          // エラーがあっても処理を止めない
-          errorHandler: notify.onError('Error: <%= error.message %>'),
-        })
-      )
-      .pipe(ejs(data)) //ejsをまとめる
-      .pipe(
-        rename({
-          extname: '.html',
-        })
-      )
-      .pipe(
-        htmlMin({
-          //圧縮時のオプション
-          minifyCSS: true, //style要素とstyle属性の圧縮
-          minifyJS: true, //js要素とjs属性の圧縮
-          removeComments: true, //コメントを削除
-          collapseWhitespace: true, //余白を詰める
-          collapseInlineTagWhitespace: true, //inline要素間のスペース削除（spanタグ同士の改行などを詰める
-          preserveLineBreaks: true, //タグ間の余白を詰める
-          /*
-           *オプション参照：https://github.com/kangax/html-minifier
-           */
-        })
-      )
-      .pipe(replace(/[\s\S]*?(<!DOCTYPE)/, '$1'))
-      .pipe(dest(paths.ejs.dist))
-      .pipe(browserSync.stream())
-  ); //変更があった所のみコンパイル
+  return src(paths.ejs.src)
+    .pipe(
+      plumber({
+        // エラーがあっても処理を止めない
+        errorHandler: notify.onError('Error: <%= error.message %>'),
+      })
+    )
+    .pipe(ejs(data)) //ejsをまとめる
+    .pipe(
+      rename({
+        extname: '.html',
+      })
+    )
+    .pipe(
+      htmlMin({
+        //圧縮時のオプション
+        minifyCSS: true, //style要素とstyle属性の圧縮
+        minifyJS: true, //js要素とjs属性の圧縮
+        removeComments: true, //コメントを削除
+        collapseWhitespace: true, //余白を詰める
+        collapseInlineTagWhitespace: true, //inline要素間のスペース削除（spanタグ同士の改行などを詰める
+        preserveLineBreaks: true, //タグ間の余白を詰める
+        /*
+         *オプション参照：https://github.com/kangax/html-minifier
+         */
+      })
+    )
+    .pipe(replace(/[\s\S]*?(<!DOCTYPE)/, '$1'))
+    .pipe(dest(paths.ejs.dist))
+    .pipe(browserSync.stream()); //変更があった所のみコンパイル
 };
 
 // Sassコンパイル
@@ -192,11 +200,76 @@ const jsBundle = (done) => {
   done();
 };
 
-// 画像webp変換（SVGを除く）
+// 画像圧縮
+const imagesCompress = () => {
+  return src(
+    paths.images.src
+    // , {since: lastRun(imagesCompress)}//gulp起動中にファイルを追加しても圧縮されないため無効化
+  )
+    .pipe(changed(paths.images.dist)) //新しく変更があったもののみ適用
+    .pipe(
+      plumber({
+        // エラーがあっても処理を止めない
+        errorHandler: notify.onError('Error: <%= error.message %>'),
+      })
+    )
+    .pipe(
+      imageMin(
+        [
+          // JPG,JPEGの圧縮
+          mozJpeg({
+            quality: 80, //画質
+          }),
+          // PNGの圧縮
+          pngQuant(
+            [0.6, 0.8] //画質の最小,最大
+          ),
+        ],
+        {
+          verbose: true, //メタ情報削除
+        }
+      )
+    )
+    .pipe(
+      // SVGの圧縮
+      svgo({
+        plugins: [
+          {
+            removeViewbox: false, //フォトショやイラレで書きだされるviewboxを消すかどうか※表示崩れの原因になるのでfalse推奨。以降はお好みで。
+          },
+          {
+            removeMetadata: false, //<metadata>を削除するかどうか
+          },
+          {
+            convertColors: false, //rgbをhexに変換、または#ffffffを#fffに変換するかどうか
+          },
+          {
+            removeUnknownsAndDefaults: false, //不明なコンテンツや属性を削除するかどうか
+          },
+          {
+            convertShapeToPath: false, //コードが短くなる場合だけ<path>に変換するかどうか
+          },
+          {
+            collapseGroups: false, //重複や不要な`<g>`タグを削除するかどうか
+          },
+          {
+            cleanupIDs: false, //SVG内に<style>や<script>がなければidを削除するかどうか
+          },
+          // {
+          //   mergePaths: false,//複数のPathを一つに統合
+          // },
+        ],
+      })
+    )
+    .pipe(dest(paths.images.dist));
+};
+
+// 画像webp変換（gif,svgを除く）
 const webpConvert = () => {
-  return src(paths.images.srcWebp, {
-    since: lastRun(webpConvert),
-  })
+  return src(
+    paths.images.srcWebp
+    // , {since: lastRun(webpConvert)}//gulp起動中にファイルを追加しても圧縮されないため無効化
+  )
     .pipe(
       plumber({
         // エラーがあっても処理を止めない
@@ -204,7 +277,7 @@ const webpConvert = () => {
       })
     )
     .pipe(webp())
-    .pipe(dest(paths.images.distWebp));
+    .pipe(dest(paths.images.dist));
 };
 
 // CSSファイルコピー（外部ファイルをsrcから取り込む場合、vendorsフォルダの中身はコンパイルしない。swiper,slickなど
@@ -249,42 +322,37 @@ const browserReloadFunc = (done) => {
 // ファイル削除
 // -----------------------
 // public 内をすべて削除
-function cleanAll(done) {
+const cleanAll = (done) => {
   src(paths.clean.all, { read: false }).pipe(clean());
   done();
-}
+};
 // HTML フォルダ、ファイルのみ削除（ assets 以外削除）
-function cleanHtml(done) {
+const cleanHtml = (done) => {
   src(paths.clean.html, { read: false }).pipe(clean());
   done();
-}
+};
 //public 内の CSS と JS を削除
-function cleanCssJs(done) {
+const cleanCssJs = (done) => {
   src(paths.clean.assets, { read: false }).pipe(clean());
   done();
-}
+};
 //public 内の画像を削除
-function cleanImages(done) {
+const cleanImages = (done) => {
   src(paths.clean.images, { read: false }).pipe(clean());
   done();
-}
-//public 内の fonts を削除
-// function cleanFonts(done) {
-//   src(paths.clean.fonts, { read: false }).pipe(clean());
-//   done();
-// }
+};
 
 // ファイル監視
 const watchFiles = () => {
   watch(paths.ejs.watch, series(ejsCompile, browserReloadFunc));
   watch(paths.styles.src, series(sassCompile));
   watch(paths.styles.copy, series(cssCopy));
-  // watch(paths.scripts.src, series(jsCompile, browserReloadFunc));
   watch(paths.scripts.src, series(jsBundle, browserReloadFunc));
   watch(paths.scripts.copy, series(jsCopy, browserReloadFunc));
+  // watch(paths.images.src, series(imagesCopy, webpConvert, browserReloadFunc));
   watch(
     paths.images.src,
-    series(imagesCopy, webpConvert, browserReloadFunc)
+    series(cleanImages, imagesCompress, webpConvert, browserReloadFunc)
   );
   watch(paths.fonts.src, series(fontsCopy, browserReloadFunc));
 };
@@ -295,10 +363,10 @@ exports.default = series(
     ejsCompile,
     sassCompile,
     cssCopy,
-    // jsCompile,
     jsBundle,
     jsCopy,
-    imagesCopy,
+    // imagesCopy,
+    imagesCompress,
     webpConvert,
     fontsCopy
   ),
@@ -306,7 +374,7 @@ exports.default = series(
 );
 
 // その他のコマンド 例： npx gulp cleanAll の形で入力
-exports.cleanAll = series(cleanAll);
+exports.cleanAll = series(cleanAll); //public内すべて削除
 exports.cleanExcludeHtml = series(cleanHtml); //assets以外削除
-exports.cleanCssJs = series(cleanCssJs);
-exports.cleanImages = series(cleanImages);
+exports.cleanCssJs = series(cleanCssJs); //css,jsを削除
+exports.cleanImages = series(cleanImages); //imagesを削除

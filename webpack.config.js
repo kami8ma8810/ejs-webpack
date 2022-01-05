@@ -16,14 +16,9 @@ module.exports = {
   },
   // 出力の設定
   output: {
-    // 出力先のパス（絶対パスを指定しないとエラーが出るので注意）
-    // `__dirname + public`のように書くと、OS によって
-    // パスが異なってしまうことがあるので、必ず`path`モジュールを利用する。
+    // 出力先のパス（絶対パスを指定しないとエラーが出るので注意）OS依存のエラーを回避するため`path`モジュールを利用
     path: path.resolve(__dirname, 'public/assets/js'),
-    // 出力するファイル名
-    // [name] には entry に指定した名前が入る
-    // このサンプルでは、entry に index と app を指定しているため、
-    // index.bundle.js と app.bundle.js が出力される
+    // 出力するファイル名 [name] には entry に指定した名前が入る。
     filename: '[name].bundle.js',
   },
   target: ['web', 'es5'],

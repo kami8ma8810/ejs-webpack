@@ -1,7 +1,7 @@
 {
   "pageMeta": {
     "home": {
-      "title": "タイトル",
+      "title": "ページタイトル",
       "description": "概要",
       "keywords": "キーワード",
       "pageUrl": "サイトの絶対パス",
