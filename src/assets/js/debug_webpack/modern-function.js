@@ -1,8 +1,4 @@
-import $ from 'jquery';
-
 export default () => {
-  //ProvidePluginでjQuery($)を読み込んでいるかテスト
-  $('body').addClass('jqueryyyyyyyyyy');
 
   // 以下Babelで変換されるかどうかのテストコード
   // クラス構文/テンプレート文字列/Promise/async,await を利用

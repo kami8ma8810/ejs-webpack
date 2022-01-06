@@ -1,23 +1,19 @@
 @use '../global' as *;
 
-// background-imageでwebpを使用する場合はここに記述
+// background-imageでwebpを使用する場合はここに記述→mixinに変更
 // --------------------------------------------------------
 /* WebP未対応のブラウザ用のスタイル */
 // --------------------------------------------------------
 .no-webp {
-  .top-fv__title {
-    &.title-sp {
-      background-image: url(#{$imgPath}fv-title-sp.png);
-    }
-  }
+  // .main {
+  //   background-image: url('../images/bg.jpg');
+  // }
 }
 // --------------------------------------------------------
 /* WebP対応のブラウザ用のスタイル */
 // --------------------------------------------------------
 .webp {
-  .top-fv__title {
-    &.title-sp {
-      background-image: url(#{$imgPath}fv-title-sp.webp);
-    }
-  }
+  // .main {
+  //   background-image: url('../images/bg.webp');
+  // }
 }

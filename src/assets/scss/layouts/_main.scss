@@ -4,4 +4,10 @@
   @include vh100;
   overflow-x: hidden;
   // background-color: salmon;
+  // background-image: url('../images/bg.jpg');
+  // @include rootWebp {
+  //   background-color: white;
+  // }
+  // @include webpBg('.main .test', '../images/bg');/
 }
+@include webpBg('.main .test', '../images/bg');

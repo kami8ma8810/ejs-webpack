@@ -1,15 +1,14 @@
 @use 'variables' as *;
 
-// ## webp classes
-$webpClassName: '.webp';
-$noWebpClassName: '.no-webp';
-
-// $selector にする background-image で、webp を出し分ける
-// ※親要素に $webpClassName / $noWebpClassName が付与されることが前提
-// --------------------------------------------------------
+// webpに対応しているブラウザの出し分け
 // $selector      {string} css セレクタ (default: jpg)
 // $filePath      {string} 背景画像ファイルパス
 // $fileExtension {string} 背景画像拡張子
+
+// ※呼び出すときは入れ子にしない
+$webpClassName: '.webp';
+$noWebpClassName: '.no-webp';
+
 @mixin webpBg($selector, $filePath, $fileExtension: 'jpg') {
   #{$noWebpClassName} #{$selector} {
     background-image: url(#{$filePath}.#{$fileExtension});
