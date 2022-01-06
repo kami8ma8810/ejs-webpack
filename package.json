@@ -1,5 +1,5 @@
 {
-  "name": "gulp-ejs-sass",
+  "name": "ejs-webpack",
   "version": "1.0.0",
   "main": "gulpfile.js",
   "license": "ISC",
@@ -46,10 +46,6 @@
     "webpack-stream": "^7.0.0"
   },
   "dependencies": {
-    "@barba/core": "^2.9.7",
-    "@barba/css": "^2.1.15",
-    "@barba/prefetch": "^2.1.10",
-    "@barba/router": "^2.1.10",
     "core-js": "^3.19.0",
     "gsap": "^3.8.0",
     "imagesloaded": "^4.1.4",
